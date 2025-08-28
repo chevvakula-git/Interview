@@ -1,0 +1,584 @@
+Lifecycle hooks in React
+Creation
+1)Constructor
+2)componentWillMount
+3)static getDerivedStateFromProps
+4)render
+5)componentDidMount
+Updation
+1)componentWillUpdate
+2)getDerivedStateFromErrors
+2)shouldComponentUpdate
+3)render
+4)componentDidUpdate
+
+Newly updated Life cycle methods
+
+CREATION PHASE
+1)Constructor
+super(this)
+this.state = {}
+addEventListeners
+2)static getDerivedStateFromProps 
+There is no this
+just return the state
+3)render
+4)componentDidMount
+
+UPDATION PHASHE
+
+1)static getDerivedStateFromProps
+2)shouldComponentUpdate
+where we can restrict the component from re-rendering
+3)render
+4)getSnapshotBeforeUpdate
+This will call just before the VirtualDOM to update the RealDOM 
+5)componentDidUpdate
+
+DELETING PHASE
+
+1)componentWillUnmount
+
+
+
+React –Redux-THUNK
+
+Import thunk from ‘react-thunk’
+const log =(store) =>{
+ return (next) =>{
+   return(action) =>{
+   const newState = next(action);
+   return newState;
+ }
+ }
+}
+const store =createStore(reducer,applyMiddleware(log,thunk));
+
+<provider store={store}><app></app></provider>
+
+Reducer:
+initialState ={
+counter:0
+}
+const reducer =(state=initialState, action) = {
+ Switch(action){
+ case “ADDITION” :
+ 	return{
+ 	…state,
+        counter:counter++
+          }
+Case “SUBSTRACT”:
+       return{
+…state,
+counter:conter--
+       }
+ }
+return state;
+}
+
+
+
+Component1:
+Import {React,Component} from Component ;
+Import {connect} from ‘React-redux’;
+Class component1 extends Component{
+render(){
+return(
+<div><button onClick={this.EventHandlerOne}>Submit</button></div>
+)
+}
+}
+mapStateToProps =(state) =>{
+return {
+ctnr:state.counter
+}
+}
+mapDispatchToProps =(dispatch) =>{
+return {
+EventHandlerOne : () =>dispatch({type:”COUNTER”});
+}
+}
+
+Export default connect(mapStateToProps,mapDispatchToProps,[mergeProps],[options])(Component1);
+
+===========lazy loading - Dynamic Imports ===========
+
+Main.ts
+import DynamicImporter from “com/components”;
+
+const dynamicComp  = DynamicImporter(() =>{
+return import("../../component");
+});
+
+
+DynamicImporter
+Const DynamicImporter = (cmp) =>{
+return class extends Component{
+state = {
+component:null
+}
+componentDidMount(){
+cmp.then(function(cmpont){
+this.setState({component:cmpont.default});
+})
+render(){
+const C = this.state.component;
+return(
+{C?<C {...props}/>:null
+)
+}
+}
+
+}
+}
+
+
+================================routing in React====================
+import a package react-router-dom
+
+router,link,Route
+<Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/topics">Topics</Link>
+          </li>
+        </ul>
+
+        <hr />
+	<Routes>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/topics" component={Topics} />
+	</Routes>
+      </div>
+    </Router>
+
+
+
+=======HOC Components: =============
+
+There are two types of HOC Component
+1)by using tag(<), we can call the simple HOC Component like below
+Const Aux =(props) => props.children;
+<Aux></Aux>
+
+2) by wrapping the other component using HOC component like below
+
+ Export default HOCComp(component,className);
+HOCComp.ts
+Const HOCComp = (wrappedComponent,className) ={
+ return props =>(<div className=”className”>
+<wrappedComponent/>
+</div>);
+}
+export default HOCComp;
+
+===========refs============= 
+
+refs are nothing but a taking references of the html elements like below
+
+import {React,Component} from 'react';
+
+class component1 extends Component{
+
+componentDidMount(){
+this.inputRef.current.click(); 
+} 
+
+render(){
+return(
+<div>
+<button ref ={(input)=> this.inputRef =input} >Submit</button>
+</div>
+)
+ 
+}
+}
+
+another way to use this ref
+
+
+class component1 extends Component{
+
+constructor(props){
+super(props);
+this.inputRef = React.createRef();
+}
+componentDidMount(){
+this.inputRef.current.click(); 
+} 
+
+render(){
+return(
+<div>
+<button ref ={this.inputRef} >Submit</button>
+</div>
+)
+ 
+}
+}
+
+refs for functional components
+
+const functionalComp=()=>{
+const  inputRef= useRef(null);
+
+return props =>(
+<div>
+<button ref ={inputRef} >Submit</button>
+</div>
+);
+
+}
+
+
+=================================================Suspence==========================
+
+
+
+
+
+
+
+=========================================== new Hooks == useState()====================
+Hooks are JavaScript functions, but you need to follow two rules when using them. We provide a linter plugin to
+enforce these rules automatically:
+
+
+This useState is will be using in functional components, In class based components we are using setState similarly we can use this 
+useState in Functional component with simple code like below
+import React,{useState} from 'react'
+
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+================================================ useContext =======================
+we can pass the global context to the child components,in a simple way like this
+
+import colorTheme from 'color/colotTheme';
+
+const theme = useContext(colorTheme);
+
+then you can directly add that into class name or you can whre ever you want.
+
+important: we should not use these hooks in a conditin and alway declares on top.
+
+
+ 
+===========================================useEffect===========================
+
+This is used for to update the side effects like when label changes then document tile changing..
+
+In earlier when we are using class based components for suppose to achive the same we need to use these methods componentDidMount(),
+ componentDidUpdate() and componentWillMount()
+but by using this useEffect hook we can achive in single method.like below
+
+every useEffect method optionally returns one method.After effect user can remove the eventListener there..
+
+import React,{useState,useContext,useEffect} from 'react';
+
+const Person =(props)=> {
+
+const [nameObj, setNameObj] =useState({name:"Raju",surName:28})
+
+useEffect(()=>{
+ document.title = nameObj.name+ " -- "+nameObj.surName;
+});
+
+
+const [width, setWidth] =useState(window.innerWidth);
+useEffect(()=>{
+const doResize = ()={setWidth(window.innerWidth)} 
+
+document.addEventListener("resize",doResize);
+
+return ()=>{
+document.removeEventListener("resize",doResize);
+}
+});
+
+changeNameHandler =(e)=>{
+ setNameObj({name:e.target.value});
+}
+changeSurnameHandler =(e)=>{
+setNameObj({surName:e.target.value});
+}
+
+
+return(
+<div>
+<label>name:</label>
+<input type="text" value={name} onChange={changeNameHandler} />
+<label>surname:</label>
+<input type="text" value={surName} onChange={changeSurnameHandler} />
+</div>
+)
+
+
+}
+=====================================================Building Own Custom Hook ======================
+
+Custom hooks are nothing but a javascript functions we can write seperately from the component..
+
+import React,{useState,useContext,useEffect} from 'react';
+
+const Person =(props)=> {
+
+
+
+const width = useWindowWidth();
+
+const name = useFormInput("Raju");
+const surName = useFormInput("Ch");
+useEffect(()=>{
+ document.title = name.value+ " -- "+name.value;
+});
+
+return(
+<div>
+<label>name:</label>
+<input {...name} />
+<label>surname:</label>
+<input {...surName} />
+</div>
+)
+
+}
+==seperated from component==
+
+function useFormInput(initialValue){
+const [nameVal, setNameVal] =useState(initialValue);
+	changeHandler =(e)=>{
+	 setNameVal(e.target.value);
+	}
+   
+   return {
+   value,
+   onChange:changeHandler
+   }
+
+}
+
+function useWindowWidth(){
+
+const [width, setWidth] =useState(window.innerWidth);
+useEffect(()=>{
+const doResize = ()={setWidth(window.innerWidth)} 
+
+document.addEventListener("resize",doResize);
+
+return ()=>{
+document.removeEventListener("resize",doResize);
+}
+});
+
+return width;
+
+}
+
+
+==============================================useRef,useMemo,useCallback,useReducer================
+useRef : to get reference of an React element or component.We can auto-focuss on input elements
+
+import {useRef} from "react";
+
+const inputElement = useRef(null);
+
+useEffect(()=>{
+inputElement.current.focus()
+},[])
+
+const clickMeHandler = () =>{
+console.log(inputElement.current.value);
+}
+
+render(){
+return (<div>
+<button onClick={clickMeHandler}>Click me!</button>
+<input ref={inputElemnt}/>
+</div>)
+}
+
+
+
+
+
+==================================================== Error Boundaries==============================
+Error boundaries are components that are catches any javascript errors in thair child components tree and log those
+errors and fall-back UI instead of component tree that crashed.
+
+limitations:It wont catches the event handler errors, asynchronus code call back errors,errors thron in the error boundary itself.
+
+static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+  
+componentDidCatch(error, errorInfo) {
+    // Catch errors in any components below and re-render with error message
+    this.setState({
+      error: error,
+      errorInfo: errorInfo
+    })
+    // You can also log error messages to an error reporting service here
+  }
+ 
+ 
+==========================================================Composite VS Inheritance=============
+
+React uses a powerfull composite model, It is the better way to reuse the code between the components.
+
+see the below example we can pass the children as any components without any limitations.
+we haven’t found any use cases where we would recommend creating component inheritance hierarchies.
+
+Props and composition give you all the flexibility you need to customize a component’s look and behavior in an explicit and safe way. 
+Remember that components may accept arbitrary props, including primitive values, React elements, or functions.
+
+function SplitPane(props) {
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}
+      </div>
+      <div className="SplitPane-right">
+        {props.right}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <SplitPane
+      left={
+        <Contacts />
+      }
+      right={
+        <Chat />
+      } />
+  );
+}
+
+
+
+====================================================== React - Native ========================================================
+
+https://facebook.github.io/react-native/docs/platform-specific-code
+
+https://snack.expo.io/
+
+
+
+
+
+
+====================================================== webpack =====================================================
+
+Webpack is a build tool and it manages your code, It will beundle your css, HTML, javascript and images. 
+
+npm init  ==> then it will create package.json, this will keep the track of your package here we need to give app.js path
+and also target dist file with bundle.js file.
+
+npm install webpack --save-dev  ==> Then it will create node module package folder.
+
+npm run build ==> (to run application) this will create build.js file finally.
+plese refer 2.jpg file.
+
+and also it has more uses cases
+
+1) For suppose if you are using es-6 features, some browsers not supported but webpack will compile the
+ code to understand old browsers/
+ 
+======================================================= webpack-dev-server =======================================
+
+npm install --save-dev webpack-dev-server
+  
+It has all functionality of webpack and providing exra functionality of developement server.
+
+npm run build ==> (to run application) this will create a localhost server and we can delete build.js from locally because 
+
+this build file will created in server side memory.
+
+for that we need to made some changes in package.json --> build like (plese refer 2.jpg file).
+
+
+========================================== webpack core features (webpack-config.js)================================
+entry,output,mudule and plugins..
+
+entry:It should provide the entry point(./src/js/app.js);
+
+output:show some path where to provide the output file like bundle.js
+
+module:how to load the files and what to do rules withe module.
+
+plugins: is used to minify or uglifying our code.
+
+========================================== force update ============
+
+
+======================================capturing phase in ReactJ===============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

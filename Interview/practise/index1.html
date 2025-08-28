@@ -1,0 +1,59 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+// find the greatest deviser 45,21
+function GenerateFunction(){
+
+var a = 102; var b=45;
+
+while(a%b !=0){
+c = a%b;
+a = b;
+b = c;
+}
+
+console.log(b);
+
+
+}
+
+function Mymethod(){
+	console.log(this);
+}
+
+var obj = {name:'ravi'}
+
+var addBind = Mymethod.bind(obj);
+
+addBind();
+
+Function.prototype.myBind = function(...args){
+let obj = args.slice(1)
+
+this.apply(args[0],obj);
+
+}
+
+
+
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="GenerateFunction()">Generators</button>
+
+</body>
+</html>
+</head>
+
+
+

@@ -1,0 +1,25 @@
+PLAN FOR THE DAY
+
+Saturday[3hours]  ==> MongoDB 1hour ,AWS Devapps 1hour, [ReactJS,Javascript,Angular 8]
+
+Sunday[3hours]    ==> ML[1 hour],Algariths[1 hour],[ReactJS,Javascript,Angular 8]
+
+Monday[2hours]    ==> AWS DevApps 1hour,[ReactJS,Javascript,Angular 8]
+
+Tuesday[2hours]   ==> Algarithms 1hour,[ReactJS,Javascript,Angular 8]
+
+Wednesday[2hours] ==> Java J2EE Spring Boot, Hibernate[1 hour],[ReactJS,Javascript,Angular 8]
+
+Thursday[2hours]  ==> MongoDB 1hour,[ReactJS,Javascript,Angular 8]
+
+Friday[2hours]    ==> Java J2EE Spring Boot, Hibernate[1 hour],[ReactJS,Javascript,Angular 8]
+
+
+IMPORTANT : Night before sleep to recollect all learnings => everyday 1 hour
+
+
+
+
+
+
+

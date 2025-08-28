@@ -1,0 +1,157 @@
+<html>
+<head>
+<title> hello world </title>
+<script>
+function fibonacci(n){
+var num =1;
+for(var i=1;i<=n;i++){
+num = num*i
+}
+return num
+}
+
+console.log(fibonacci(5));
+
+
+function IsPrimeNumber(n){
+var retValue = true;
+for(let i=2;i<n;i++){
+if(n%i==0){
+retValue = false;
+}
+}
+return retValue;
+}
+
+console.log(IsPrimeNumber(5));
+var storeVal = 1;
+
+function factorial(n){
+ if(n===0){
+  return 1
+ }
+ return n*factorial(n-1);
+}
+
+var t1 = performance.now(); // 0! = 1 important
+console.log(factorial(3));
+var t2 = performance.now()
+console.log(t2-t1);
+var arrad = [-5,3,2,7,9,4];
+function findtheIndex(n){
+return arrad.indexOf(n)
+}
+console.log(findtheIndex(2))
+
+// Binary Search
+var sortedArr = [-5,3,5,7,9,11,14,34];
+
+function binarySearch(sortedArr,target){
+let leftIndex = 0;
+let rightIndex = sortedArr.length-1;
+
+
+while(leftIndex <= rightIndex){
+let middleIndex = Math.floor((leftIndex+rightIndex)/2);
+if(sortedArr[middleIndex] === target){ return middleIndex}
+
+if(target > sortedArr[middleIndex]){
+leftIndex = middleIndex+1;
+}else{
+rightIndex = middleIndex-1;
+}
+
+}
+return -1;
+}
+
+binarySearch(sortedArr,3);
+
+
+var sliceArr = [2,4,6,7,11,4]
+
+console.log(sliceArr.splice(2));
+
+const a = [
+{
+name:"hello",
+id:4
+},
+{
+name:"fellow",
+Id:2},
+{
+name:"jjgjhj",
+Id:3},
+{
+name:"werty",
+Id:5},
+{
+name:"lkiuyuy",
+Id:1},
+{
+name:"eashghg",
+Id:6}
+];
+
+function mySortFunction(a){
+
+return a.sort((a,b)=>{
+ let nameA = a.name.toUpperCase();
+ let nameB = b.name.toUpperCase(); 
+ if(nameA>nameB){ return -1;}
+ if(nameA<nameB){ return 1;}
+  return 0
+})
+
+}
+
+console.log(mySortFunction(a));
+
+function Person(name,gender,birthYear){
+this.name = name;
+this.gender = gender;
+this.birthYear = birthYear;
+
+};
+
+Person.prototype.getAge =()=>{
+ let age = (new Date().getFullYear() - this.birthYear);
+ return age;
+}
+
+let john = new Person("John","male",1992);
+
+console.log(john.getAge());
+
+const arr = [1,2,3];
+
+
+
+Array.prototype.myFilter = function(callback){
+ const newArray = [];
+ for(var i=0;i<this.length;i++){
+  if(callback(this[i])){newArray.push(this[i])};
+ }
+ return newArray;
+}
+const one = arr.myFilter((it)=>{
+ return it>1;
+});
+
+console.log(one);
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<button onclick="GenerateFunction()">Generators</button>
+<p> Elegance in engineering now in world</p>
+@reduxjs/toolkit
+<br> 
+<p> arista ballet </p>
+</body>
+</head>
+</html>
+
+
+

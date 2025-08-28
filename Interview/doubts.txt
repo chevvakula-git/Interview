@@ -1,0 +1,42 @@
+
+3)Why redux-thunk to maintain global store
+
+7)Algarithems O(n);
+
+9)print all douplicate numbers in [23,33,33,41,42];
+A) By using indexOf and lastIndexOf, [...new Set(arr)] and object
+
+
+11)How to find a depth of an object?
+
+12)what is the use of package.json file? what is the version npm
+
+13)What is webpack ?
+
+14)Browser forword backword button manage in React or Angular?
+
+15)Dynamic menu tab?
+
+16)Gmail creation?
+
+17)Defference between Angular and React?
+
+18)Defference between promises and callbacks?
+
+19)in React what are all changes we need to made while moving code from Development to Production?
+
+20)Pascal triangle in javascript
+
+21)[1,2,1,3,2,4,2,3,5,9] to remove duplicates and itsels like [4,5,9]?
+
+22)
+
+Map,Set,WeekMap,Generators,redux vs Context-API,Prototyps,Refs
+
+9948862322
+
+
+
+
+
+

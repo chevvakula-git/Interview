@@ -1,0 +1,96 @@
+1)Lifecycle hoocks in Angular
+
+ constructor
+ ngOnChanges
+ ngOnInit
+ ngDoCheck
+ngAfterContentInit
+ngAfterContentChecked
+ngAfterViewInit
+ngAftreViewChecked
+ngOnDestroy
+
+2) What is observable in Angular, how to use it?
+ import Obsevable from "angular/core";
+
+
+3)Shadow Dom?
+
+Shadow DoM basically allows group of DOM implementations hidden in sigle element(component) and encapulates styles to the element.
+Shadow DOM standard that allows view, style, and behavior encapsulation.
+
+4)deference between component and directive?
+
+5)Difference btw ngIf and ngShow?
+
+6)Angular compilars AOT, JIT?
+Ans:
+Ahead of time:Compiles your application and libraris at build time
+Just In Time:Compiles your applcation on browsers at runtime.
+
+
+7)difference btw observables and promises?
+
+
+8)differences btw meterial and boostrap?
+
+9)differences btw ngboostrap and boostrap?
+
+ ================= Router in Angular ===================
+
+app.Modole
+
+const routes:Routes =[  
+{
+path:"",
+component:userDetails
+}
+
+]
+
+
+needs to register in in the application in ngModule
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+
+userDetails.ts(source)
+
+<button routerLink="users:id" routerLink=['/user','queryParams','fragments'] queryParam=[] fragments=[]></button>
+
+
+userContactDetails.ts (target)
+import {activeRoute} from '@angular/activeRoute'
+
+constructor(private route:ActiveRoute){
+
+}
+
+const route = this.route.snapShot.params;  
+const route = this.route.snapShot.queryParams;  
+const route = this.route.snapShot.fragments;  
+
+this.route.params.subscribe((params:Params)=>{
+this.route.navigate(['../'],relativeTo:this.route)
+})
+
+
+=====================================================================
+
+
+
+
+
+
+
+
+
+
+
+

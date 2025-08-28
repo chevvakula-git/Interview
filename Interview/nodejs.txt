@@ -1,0 +1,91 @@
+
+========================callStack,Node API,CallbackQueue========
+console.log("starting");
+
+setTimeout(()={
+console.log("emd");
+},0);
+
+console.log("stopping");
+
+callStack : It contains a simple javascript method excution like tennis balls in cane.first it will add main() method to callStack.
+
+Node API: for example setTimeout is not a javascript method, the implementation is writen c++ in nodeJS.
+So setTimeout waits the time in the nodeAPI block for 0 millisecons and then it will move to callbackqueue.
+
+CallBackQueue : It will holds the callback methods from NodeAPI
+
+EventLoop: It has its own mechanism like whenever it finds callback in CallBackQueue first it will checks wether the callStatck
+is empty then it will move the methods to callStack to exicute.
+
+please refer 2.jepeg in images
+
+And also we have Microtask queue for Promises which will high priority in the call stack queue
+
+============================ nodeJS server (WEBPACK) configuring for basic HTML & JS=============================
+Webpack is build tool but it wil do more than that it will manages our code js, css,images and html file enables the
+serverside rendering and also it will do convert our code to understand by older browsers by using babel compiler(like
+babel-loader and webpack). 
+
+"build": "webpack src/js/app.js --output dist/bundle.js --mode=development"   ==> needs to be added in package.json file
+
+npm init
+
+npm install webpack --save-dev
+
+once dist/bundle.js file is created then now we need to replace app.js with bundle.js file then run the application.
+
+2) npm install webpack-dev-server --save-dev
+
+runs the commond and delete the dist folder and it show some erros then need to modify the package.json file like below.
+
+================package.json
+"build": "webpack --entry ./src/js/app.js --output-filename dist/bundle.js --mode=development"
+
+the core features of an webpack 
+
+	entry ===> module loders ===>plugins ==> output
+
+
+for suppose we have a huse configuration then we can move to configuration file like below.
+================= webpack.config.js ===
+const path = require('path');
+const webpack = require('webpack')
+module.export = {
+ mode: 'development',
+ entry:'./src/js/app.js',
+ output:{
+     path: path.resolve(__dirname,'dist'),
+     filename:'bundle.js'
+ },
+ module:{
+     rules:[{
+         test:/\.css$/,
+         use:[
+             'style-loader',
+             'css-loader'
+         ]
+     }]
+ },
+
+ plugins:[
+   new webpack.optimize.UglifyPlugin({...})
+ ]
+
+
+}
+======================================================express server and  MongoDB connection================================
+1) install nodejs,
+2) create a flder open commond prompt on that 
+3) npm init -> will create package.json file with some configurations modify/add -> server:'nodeman'(the nodemon NPM package allows you to run a Node.js server and it watches for any changes so you don't have to keep restarting)
+4) npm i bcryptjs config express express-validator jest jsonwebtoken mongoose
+5) npm i -D concorrently nodemon
+6) create a server.js and write app.listen(PORT,()=>console.log('App is running in '+ PORT));
+7)once everything is up-running in localhost then create your MogoDB cluster and create a connection string
+8)
+
+
+
+
+
+

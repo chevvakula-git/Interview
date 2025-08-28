@@ -1,0 +1,261 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+var obj = [];
+console.log(Object.prototype.toString.apply(obj));
+
+console.log(sum(2)(6)(9)(10)(9))
+function sum(a){
+
+return function(b){
+	if(b){
+	return sum(a+b);
+	}
+	
+	return a;
+}
+
+};
+
+function doAPICall(value){
+console.log(value+'--- API is calling...');
+}
+
+function betterFunction(){
+var timer;
+return function(event){
+//let context = this;
+clearTimeout(timer);
+timer = setTimeout(()=>{
+doAPICall(event.target.value);
+},10000)
+}
+
+}
+
+//map,slice,splice,reduce,push,pop,unshift
+const keyUpFunction = betterFunction();
+
+var arr = [['one','two'],['three','four']];
+
+var obj = {one:'two',three:'four'}
+
+var newArr = arr.reduce((a,b)=>{
+ a[b[0]]=b[1];
+ return a;
+},{});
+
+console.log(arr)
+console.log(newArr);
+
+function add1(a){
+	return new Promise((approve,reject)=>{
+		setTimeout(()=>{
+		approve(a+1);
+		},2000)
+	})
+}
+function add2(a){
+	return new Promise((approve,reject)=>{
+		setTimeout(()=>{
+		approve(a+1);
+		},2000)
+	})
+}
+
+const abcd = async()=>{
+
+const apiCall = await add1(1);
+const apiCall1 = await add2(apiCall);
+
+return(apiCall+apiCall1)
+}
+
+console.log(abcd());
+var arr= ["hjh","hjh1","h2jh","h1jh","h2jh","h4jh","h5jh","h6jh",]
+function* Gen(){
+for(var i=0;i<10;i++){
+yield arr[i];
+}
+}
+const funct = Gen();
+function GenerateFunction(){
+console.log(funct.next());
+}
+
+function calculator(a){
+
+return (b)=>{
+return a*b;
+}
+
+}
+
+const clac = calculator(3);
+
+console.log(clac(2));
+
+
+
+var arr =[{firstName:'Akshay',age:26},
+{firstName:'Kumar',age:39},
+{firstName:'Once',age:55},
+{firstName:'Deepika',age:26},]
+
+const result = arr.reduce((a,i)=>{
+
+if(i.age<30){
+a.push(i.firstName);
+}
+
+return a;
+
+},[]);
+
+console.log(result);
+
+
+function a(){
+console.log('a called');
+}
+
+(function(){
+console.log('b called');
+})();
+
+function Parent(color,height){
+
+this.color ='red';
+this.height = 5;
+
+}
+
+var parent = new Parent('red',5)
+
+function Child(){
+Parent.call(this);
+}
+
+Child.prototype = Object.create(Parent.prototype);
+
+var child = new Child();
+
+var object1 = {a:1,b:{c:2}}
+
+var obj2 = Object.assign({},object1);
+obj2.b.c=3
+console.log(object1);
+
+console.log(obj2);
+
+var mainObj ={
+x:1,
+myFun(){
+	return this;
+}
+}
+console.log(mainObj.myFun());
+
+
+var sortArray = ['raju','sravya','arun'] 
+
+var sortedArray = sortArray.sort()
+console.log(sortedArray.sort());
+
+var arra = [1,2,3,4,5,6,7];
+
+var len = arra.length;
+var max = -Infinity;
+
+while(len--){
+if(arra[len] > max){
+ max = arra[len];
+}
+}
+console.log(max);
+
+let myObject = {
+x:1,
+myFunc:()=>{
+return this;
+}
+}
+
+console.log(myObject.myFunc());
+
+var arrays = [1,2,3,4,5]
+
+console.log(arrays.slice(0,1))
+console.log(arrays)
+//console.log(arrays.splice(1,1))
+
+var redArray = [1,2,3,4,5,6];
+
+
+Array.prototype.MyReduce = function(callback){
+ let incremetal;
+ for(var i=0;i<this.length;i++){
+  incremetal = incremetal?incremetal+this[i]:this[i];
+ if(this[i+1]){
+	callback(incremetal,this[i+1]);
+	}
+ }
+ 
+};
+
+var contArray = redArray.MyReduce((a,b)=>{
+ return a+b;
+})
+
+console.log(contArray);
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="GenerateFunction()">Generators</button>
+<p> Elegance in engineering now in world</p>
+@reduxjs/toolkit
+<br> 
+<p> arista ballet </p>
+<div style="display:flex;height:300px;overflow:hidden;background-color:red;width:400px;transform: translateY(-50%);flex-direction: column;">
+<div class="child1" style="background-color:gray">
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in worldElegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in world
+</div>
+<div class="child2" style="height:100%; overflow-y: auto;background-color:yellow">
+Elegance in engineering now in world
+Elegance in engineering now in worldElegance in engineering now in world
+Elegance in engineering now in worldElegance in engineering now in world
+Elegance in engineering now in world
+Elegance in engineering now in worldElegance in engineering now in world
+</div>
+</div>
+
+</body>
+</html>
+</head>
+
+
+

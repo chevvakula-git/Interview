@@ -1,0 +1,610 @@
+1)find typeof an Array?
+
+Object.prototype.toString.call(rgs) === '[Object Array]';
+
+======================================call(),apply(),bind()==================
+
+let object ={
+name:"king",
+age:30
+}
+
+let myMethod = function(x){
+ return this.name +" and my age "+this.age+" and value "+x;
+}
+
+myMethod.call(object,"some");
+
+for apply we should send second parameter as an array otherwise throus an error
+
+myMethod.apply(object,["some"]);
+
+bind method will aslo do the same but it won't invock the method, we need to store it in a variable and invoke it later
+like below
+
+var bindMethod = myMethod.bind(object);
+bindMethod("Some");
+
+
+
+
+================================polyfills====================================
+
+3)What are polyfills?
+
+
+A polyfill, or polyfiller, is a piece of code (or plugin) that provides the technology that you, the developer, expect the browser
+ to provide natively.
+
+for Examples new javascript Methods or html tags like Canvas are not recognized by old browsers then poly fills converts that 
+into natively.
+
+code examples Array.prototype.myModernMethod = function(){
+
+(logic)
+
+}
+===========================================closures=======================
+
+Child function has access the parent method parameter even after it returned
+
+let parentFun =function(x){
+return function(y){
+ return x*y;
+}
+}
+
+=============================================multiple function currying using closure concepts=======
+4)Sum(a)(b)(d).... write one method?
+
+let sum = function (a) {
+
+  let fun = function(b){
+	  if(b){
+	   return sum(a+b);
+	  }
+	  return a;
+    
+  }
+  
+  fun.toString =() => a;
+  
+  return fun;
+ 
+}
+
+alert(sum(10)(2)(3)(4));
+
+=============================================function currying using bind method=======================
+
+let multiply = function(x,y){
+ return x*y;
+}
+
+let multiplyWithTwo = mutiply.apply(this,2);
+
+console.log(multiplyWithTwo(3));
+
+=============================================== shadow DOM an Virtual DOM===================
+
+Virtual DOM==
+
+Virtual DOM is about avoiding unnecessary changes to the DOM, which are expensive performance-wise, because changes to the DOM 
+usually cause re-rendering of the page. Virtual DOM also allows to collect several changes to be applied at once, so not every 
+single change causes a re-render, but instead re-rendering only happens once after a set of changes was applied to the DOM.
+
+Shadow DOM==
+
+Shadow dom is mostly about encapsulation of the implementation. A single custom element can implement more-or-less complex
+ logic combined with more-or-less complex DOM. An entire web application of arbitrary complexity can be added to a page by
+ an import and <body><my-app></my-app> but also simpler reusable and composable components can be implemented as custom elements 
+ where the internal representation is hidden in the shadow DOM like <date-picker></date-picker>.
+
+Style encapsulation Shadow DOM is also about preventing styles being applied accidentally to elements the designer didn't intend to,
+ for example because the CSS or components library you are using changed a selector that now applies to other elements that use the 
+ same CSS class names. Styles added to components are scoped to that component and bleeding out or in of styles is prevented.
+
+we can creat our own shadow DOM
+
+var div = document.getElementById("host");
+
+var shadowRoot = div.createShadowRoot()
+
+
+==Shadow DOM and performance==
+
+Even though shadow DOM is not about performance in the first place it also has performance implications. Because styles are scoped, 
+the browser can make assumptions about some changes to affect only a limited area of the page (the shadow DOM of a custom element)
+ which can limit re-rendering to the area of such a component, instead of re-rendering the entire page.
+
+.This is the reason the >>>, /deep/, and ::shadow CSS combinators, which allowed to apply styles across shadow DOM boundaries,
+ were deprecated and are subject to be removed soon from Chrome (other browsers never had them AFAIK). The mere existence 
+ of these combinators prevents the kind of optimization mentioned in the previous paragraph.
+
+Angular2 uses the advantages of both worlds.
+
+<div id="shadowHost">Hello</div>
+<div class="x">Outer Element</div>
+
+var host = document.querySelector('#shadowHost');
+
+var shadowRoot = host.createShadowRoot();
+
+var div = document.createElement('div');
+div.textContent = "Can you see meddf now";
+div.className = "x";
+
+shadowRoot.appendChild(div);
+
+
+=========================================myBind()-Implementation ==============
+var obj2 ={
+age:30
+}
+
+var myAge = function(name,type){
+return this.age +" -- "+name+" -- "+type;
+}
+
+Function.prototype.myBind = function(...args){
+  var args1 = args.slice(1);
+   
+    return this.apply(args[0],args1);
+
+}
+var myFun2 = myAge.myBind(obj2,"King","mass");
+
+
+console.log(myFun2());
+
+==========================================myCall() - Implementation =============
+
+var obj2 ={
+age:30
+}
+
+var myAge = function(name,type){
+return this.age +" -- "+name+" -- "+type;
+}
+
+Function.prototype.myCall = function(...k){
+   var k1 = k.slice(1);
+  return this.apply(k[0],k1);
+}
+
+var fun = myAge.myCall(obj2,"Raj","Kri");
+
+console.log(fun);
+
+===========================================Debouncing========================================
+
+For Search in flipcard When I do a service call on on every key strock, that will network performance issue 
+so here when i type and pause my search for some time the search should triggered for that we will use debouncing method
+
+var counter =0;
+function betterFun(){
+console.log("typed val",counter++);
+}
+
+function magicFunction(fn,d){
+let timer;
+return function(){
+let context = this;
+clearTimeout(timer);
+timer = setTimeout(()=>{
+fn.call(context);
+},d)
+
+}
+
+}
+const bestFun = magicFunction(betterFun,300);
+
+<input type="text" onkeyup="bestFun()" />
+
+=============================================Async vs Defer =================================================
+These are the attributes of the script tags, please refer 1.jpg image
+
+Normal(without any attribute) : HTML code parsing is started and and stopped while JS code parsing and exicuting then only 
+HTML parsing will be started and completes 
+
+Async : HTML parsing and JS code Parsing started at one point but while JS code is exicuting HTML parse is stopped after
+JS exicuting then again HTML parsing is started and completed.
+
+Defer : HTML parsing and JS code Parsing started at one point once the HTML parse is completed then after JS code will be
+exicuted.
+
+When we have dependency and JS files needs to be loaded in an order the we have to use this Defer,
+
+and if we dont have any dependency and loading third party tools then we can use the Asyn atrribute.
+
+============================================= Event flow ==================================================
+There are three phases in event flow Capturing,Targeting and Bubbling..
+If useCapture make it true for enabling the capturing then bubling phase will nat call.
+div.addEventListener("click",()=>{ console.log('use once clicked')},true)
+
+============================================== Event Deligation =================================
+If events has bubbling phase the event deligation will also be available.
+Event deligation will be used many times for one div has many child elements insteadof adding events every child element 
+we will add evnt on parent element and we can delegate the event to every child like below
+
+function eventDelegationToChild(e){
+console.log(e.target) //when you click on child elemenet that will console the same element
+}
+
+<div id="parent"  onclick="eventDelegationToChild">
+<div class="child"></div>
+<div class="child"></div>
+<div class="child"></div>
+<div class="child"></div>
+</di>
+
+=========================================================Array Methods======================
+slice Methods : It won't changes the original array and it returns a new array like
+
+var arr = ["Nani","Raju","Chintu","Geetha","Santhi"];
+
+var newArr = arr.slice(startIndex =0,endEndex=3); note: End Index is not included in the returned array.
+
+console.log(newArr); // ['Nani','Raju','Chintu'];
+
+======
+
+Splice Method: It modifies the original array and returns deleted items as an array.
+
+var arr = ["Nani","Raju","Chintu","Geetha","Santhi"];
+
+var newArr = arr.splice(startIndex=0,1,"king"); note:second parameter should be how many elements should be removed
+
+console.log(arr); //["king","Raju","Chintu","Geetha","Santhi"];
+
+=======
+
+Array.Map method: It iterates every element and return new modified Array but it wont change the original array
+
+var arr = ["Nani","Raju","Chintu","Geetha","Santhi"];
+
+var newArray = arr.map(function(item,index){
+
+return item*2;
+
+});
+
+console.log(newArray);
+
+=======
+
+Array.reduce method return an item but it wornt change the original array.first parameter is an incrimental based some operation
+in that function.
+
+var numArray = [1,2,3,2,3];
+
+var arrayTotal = Array.reduce(function(a,b){
+ return a+b;
+});
+
+console.log(arrayTotal);
+
+=========
+
+
+
+
+
+
+============================================Math.max.apply()==================================================
+
+Math.max.apply(null,[1,43,65,23,121]) // 121
+
+============================================Deapth of an Object=================================
+
+let myObject = {name:"Raju",
+type:{
+ gender:"male",
+ obj:{
+  name:"ravi",
+  children:{
+    name:"vandana"
+   ganesh:{
+     children:{
+	 name:"King"
+	 }
+   }
+  }
+ }
+}
+}
+
+======================================String sorting in Array ====================
+var cars = [{type:"Volvo", year:2016},{type:"Saab", year:2001},{type:"BMW", year:2010}];
+cars.sort(function(a, b){
+  var x = a.type.toLowerCase();
+  var y = b.type.toLowerCase();
+  if (x < y) {return -1;}
+  if (x > y) {return 1;}
+  return 0;
+});
+
+console.log(cars);
+
+
+=====================================CORS (Cross Origin Resource Sharing)===================
+
+Browsers having this CORS mechanism, erlier browsers are not allowing resource sharing between 
+the web apps which are in defferent domain or origin by using this CORS we can achive that.
+
+   Domain 1                          Domain 2
+           -------preflight(options)--------> (Browser itselef will do)
+		   <-----additional http headers------- Server validates and sets --> Accept-Controll-Aloow-Origin:*(PUT,GET,DELETE)
+		   ------POST Request------>
+		   
+ In the above I am sending or receiving some data from Domain1 to Domain2.
+ If it is simple service call it won't happend(preflight and httpheaders)
+
+
+======================================= comparing two objects ================================
+
+var obj1 = {a:"name",b:"age"};
+
+var obj2 = {a:"name",b:"age"};
+
+console.log(obj1 === obj2); // false;
+
+but there a way to compare objects like below
+
+JSON.stringify(obj1) === JSON.stringify(obj2);
+		   
+
+======================================== Defference Between Callback and Promises ==============
+Promises more advanced then callbacks..
+
+1)
+
+
+
+//call back method=====
+ var validFunction = (val,callback) =>{
+ 
+ setTimeout(function(){
+	 callback(undefined,'reject');
+	 callback('approved',undefined);
+ },val);
+ 
+ }
+ 
+ validFunction(3000, function(resolve,reject){
+	   if(reject){
+	   return console.log("request got rejected");
+	   }
+	   
+	   return console.log("request approved...");
+   
+ });
+ 
+ 
+ /// promises ================
+ 
+ const myPromise = new Promise(function(resolve,reject){
+ 
+ setTimeout(function(){
+   reject("Request got rejected!");
+   resolve("Request got Approved");
+   
+ },2000);
+ 
+ });
+ 
+ myPromise.then(function(resolve){
+ 
+  console.log(resolve);
+ }).catch(function(error){
+ 
+ console.log(error);
+ });
+ 
+
+======================================== async and await ========================
+it is ES6 features, and the advantage is we can ise it in a long chain promises to avoid the avoid the confusion
+and complexity of the code, also it make it available the scopped variables in one function.
+
+const add = (a,b)=>{
+   return new Promise((resolve,reject)=>{
+   
+   setTimeout(function(){
+      resolve(a+b);
+   },2000);
+   
+   })
+}
+
+const doWork= async()=>{
+
+const result1 = await add(1,2); 
+const result2 = await add(result1,5);
+
+return result2;
+
+}
+
+doWork().then(function(result){
+console.log(result);
+}).catch(function(e){
+console.log(e);
+})
+
+
+=========================================JWT Token =======================================================
+JSON Web Token is seperated with 3 section all are base 64 encoded 
+
+header: it is an object with {typ:'jwt' ang:'hashing algarithem HS256'} TYPE SHOULD BE JWT TOKEN ONLY.
+
+payload:The information which we need to transmit and info about jwt token.
+
+signature:a hash of header and payload using 'secret'
+
+jwt = header+payload+signature;
+
+======================================== pascal in javascrpt ===============
+
+function pascals(numRows) {
+    if (numRows === 0) return [];
+    if (numRows === 1) return [[1]];
+    let result = [];
+    for (let row = 1; row <= numRows; row++) {
+        let arr = [];
+        for (let col = 0; col < row; col++) {
+            if (col === 0 || col === row - 1) {
+                arr.push(1);
+            } else {
+                arr.push((result[row-2][col-1] + result[row-2][col]));
+            }
+        }
+        result.push(arr);
+    }
+    return result;
+}
+
+	[1]
+      [1][1]
+    [1][2][1]
+  [1][3][3][1]
+=======================================================Iteraterrs and generaters ==========
+function* myGen(){
+for(var i=0;i<3;i++){
+yield 'yes'+i;
+}
+
+}
+let arr = [1,2,3,4];
+let myfun = myGen();
+
+function myFun(){ // this is on click method
+console.log(myfun.next());
+}
+
+let iterater = arr[Symbol.iterator]();
+console.log(iterater.next());
+console.log(iterater.next());
+console.log(iterater.next());
+console.log(iterater.next());
+console.log(iterater.next());
+
+===========================================================Creating Memoization ===============
+
+function calculator(a){
+
+return fuction(b){
+return a*b;
+}
+
+}
+
+const clac = calculator(3)
+
+console.log(calc(2));
+
+=============================================================Set(),Map(),WeekSet(),WeekMap()==============
+
+Set : one kind of an object which will not hold duplicate values.And it has some methods like add,delete,entries(),values(),forEach..etc
+WeakSet:to save memory and the data is only avaialble with in that block,once block ends the data will be garbage collected.
+
+var set = new Set([a,b,c,d,r])
+
+Map: one kind of objects that can hold keys as an objects
+
+var map = new Map([['apples',400],['oranges',200],['kiwi',100]])
+
+
+=================hoisting===============
+
+var abc =10;
+
+function abc(){
+
+}
+
+const xyz = () =>{
+
+}
+
+let abc1 = 20;
+
+const abc2 = 30;
+
+=========================cross site scripting attacks==============
+
+
+npm  sanitize => Is used for all text input data/API call-backs data is sanitize.
+
+npm audit => any vulnarable 3rd party libraries having melciuos code then we can identified with npm audit.
+
+
+========================== MutationObserver API ==================
+
+any DOM content changed then this API can be invoked a callback function with that html element.
+
+==========================in package.json ~ ^(tilde,cap) symbols for versions ==============
+
+for example in package.json we have these symbol like "@ant-design/icons": "^4.3.0" means it can be change minor version changes like "@ant-design/icons": "^4.5.0"
+
+symbol like "@ant-design/icons": "~4.3.1" means it can be change Patch version changes like "@ant-design/icons": "~4.3.5"
+
+Note: if pac
+
+
+====================================
+transitive dwpendencies
+npm -> installing 
+npx -> exicute a package
+
+consistant hashing
+hot module replacement -> File watching algarithms
+
+parceljs.org
+=================================csp=====
+content security policy
+
+
+==========hash map and Hsh Table===========
+to reduce the time complexity we can use this hashmap and hashtable
+
+[]
+=======================myMap Array function===============
+
+var arr = [];
+
+Array.prototype.myMap = function(callback){
+    const newArray = [];
+for(var i=0;i<this.length;i++){
+	newArray.push(callback(this[i],i));
+}
+return newArray;
+}
+
+const mapArra = arr.myMap((item)=>{
+return item*2;
+})
+ console.log(mapArra);
+
+============================Web Security===============
+1) XSS(Cross Site Scripting)
+2)IFrame Protection
+3)Security headers
+4)Clientside Security
+5)Secure Communication (HTTPS)
+6)Dependency Security
+7)Compliance and regulation
+8)Input validation and Sanitisation
+
+
+
+
+
+
+
+
+ 
+
+
+
+

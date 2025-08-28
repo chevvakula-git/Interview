@@ -1,0 +1,16 @@
+1)CSS Restting and CSS Normalizing?
+display:flex;
+flex-direction:row;
+flex-wrap:wrap-reverse;
+justify-content:center;space-between;
+align-items:center;
+
+
+=========================================== css for vertical and horizontal center====================
+
+position:absolute;
+margin:auto;
+top:0;left:0;right:0;bottom:0;
+
+====================================================
+

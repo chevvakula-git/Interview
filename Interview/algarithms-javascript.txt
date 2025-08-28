@@ -1,0 +1,43 @@
+ ==============BigO notation=============
+Choosing a worst case scenario to compute Time and Size complexcity. performance.now()
+
+function Generate(n){
+var strtVal = 0;
+
+for(var i=1;i<=n;i++){
+strtVal = strtVal+n;
+}
+return strtVal;
+}
+
+Generate(4); it will print like 1+2+3+4 = 10
+
+The above is Liner Time => if param value is increases then the Time complexity will increases
+
+the above algarithm can be achive in single line like below
+
+function Generate(n){
+return (n/2)*(n+1);
+}
+
+This is called Constant Time => Even the param value is increased the time complexity will always same.
+
+=====================================Polindram===================
+
+
+==================Greatest Deviser of two numbers refer image 5=======
+
+var a = 75; var b=13;
+
+while(a%b !=0){
+c = a%b;
+a = b;
+b = c;
+}
+
+console.log(b);
+
+========================
+
+
+

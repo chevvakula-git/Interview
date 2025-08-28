@@ -1,0 +1,144 @@
+ MONGO DB ( Collection, Indexing, Aggregation, Replication, Sharding, Analyzing Queries) 
+
+chevvakula.raju87@gmail.com
+
+====================================Monogo DB connection===============
+
+const mongodb = require("mongodb");
+
+const MongoClient = mongodb.MongoClient;
+
+const conectionURL = "mongodb://127.0.0.1:27017";
+
+const databaseName = "task-manager";
+
+MongoClient.connect(conectionURL, {useNewUrlParser:true}, (error,client)=>{
+
+	if(error){
+      return console.log("Connection failed!");
+	}
+	
+	if(client){
+	
+	const db = client.db(databaseName);
+	
+	db.collection('user').insertOne({
+	name:"Andrew",
+	age:27
+	}, (error,result)=>{
+	if(error){
+	return console.log("Error occured while inserting data..");
+	}
+	
+	console.log(result.ops);
+	
+	});
+	
+	}
+	console.log("Connected correctly..");
+
+});
+
+
+Note: InsertMany is allowing as first parameter as an array of objects.
+
+
+============================================ findOne and find methods ===================
+
+ findOne ==> to get a single record from mongo db then we can use it.like below
+
+db.collection('user').findOne({
+	age:27
+	}, (error,result)=>{
+	if(error){
+	return console.log("Error occured while inserting data..");
+	}
+	
+	console.log(result); /// then it will print that one record
+	
+	});
+	
+	
+ find  ==> for this method there is no call-back but it will return set of methods like toArray,count....see the documents like below
+
+  db.collection('user').find({age:27}).toArray((error,result) =>{
+	if(error){
+	return console.log("Error occured while inserting data..");
+	}
+	
+	console.log(result); /// then it will print that all record where age=27.
+	
+	});
+
+
+=========================================== updateOne and update =========================
+
+This is quite deferent it will use promises to update the data in the mongodb by using update operators($set,$inc...)
+
+it has 3 parameters find, update, options
+
+db.collection('user').updateOne({_id:new ObjectID("uywe6weuyweuqyquw")},
+$set:{
+age:28
+}
+).then(function(result){
+
+}).catch(function(error){
+
+});
+
+db.collection('user').updateMany({completed:false},
+$set:{
+completed:true
+}
+).then(function(result){
+  console.log(result.updateCount); return updated records count.
+}).catch(function(error){
+
+});
+
+
+===========================================deleteOne, deleteMany===============
+
+db.collection("user").deleteMany({age:27}).then(function(result){
+console.log(result); // deleted
+}).catch(function(error){});
+
+
+db.collection("user").deleteOne({_id:new ObjectID('93y239ry2ry9ry923ry89')}).then((result)=>{
+console.log(result);
+}).catch((error)=>{ console.log(error)});
+
+
+===========================================Mogoose==============================
+
+Mongoos is used to create models and for validating the model types
+
+const mongoose = require("mongoose");
+const conectionURL = "mongodb://127.0.0.1:27017/task-manager";
+
+mongoose.connect(conectionURL,{useNewUrlParser:true,useCreateIndex:true});
+
+const User = mongoose.model("User",{
+description:{type:String},
+age:{type:Number}
+})
+
+const user = new User({description:"Hi Chand",age:65});
+
+user.save().then(()=>{  // once success it will store database the data and _id,__v.
+
+console.log("Successfully saving data");
+
+}).catch(()=>{
+
+console.log("Error while saving data");
+
+});
+
+
+
+======================================= bcrypt===================
+
+
+

@@ -1,0 +1,24 @@
+https://www.youtube.com/watch?v=oYXivKMSEqM
+
+1collections
+
+Map,Set,List
+
+1)what is wrapper class?
+
+Wrapper class is nothing but which will convert the primitive into reference type.
+
+
+
+2)wht is defference between process and threads?
+
+Basically one process can have multiple threads.And also OS has a multiple process in it.
+
+3)waht is casting in java?
+
+Casting in java is nothing but a type concversion for example primitive types to Objectes or reverse.
+
+Integer myInt = new Integer(9); 
+myInt = 
+
+ 

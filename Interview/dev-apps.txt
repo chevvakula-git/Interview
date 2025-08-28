@@ -1,0 +1,16 @@
+Dev Aps Stages
+
+1)Venrsion Controll(Source code management):
+(Once the developer checked in the code - find the defferent verions of the code)
+
+2)Continuous Integration: 
+Once the developer checked in the code, Continuous integration server will take the code and it will do Compile and Build(Maven,Ant) code Review the code and validating , unit testing(Selinium, J-unit auto testing tools) and and integration Testing.
+
+3)Continuous Delivery : In this state Deploying the build application in the test servers.
+
+4)Continuous Deploying :Buy using Docker or puppet we can deploy our tested application in the Production Server for release.
+
+After all stateges done the our live application will continuously monitor by plunk tlc stack
+
+
+
