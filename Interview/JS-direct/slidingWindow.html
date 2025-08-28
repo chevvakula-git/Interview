@@ -1,0 +1,174 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+
+//Map, Set, WeekMap, WeekSet
+var obj1 = {name:'kumar'}
+var obj = {name:'raju',undefined:'29',0:'age',null:{}};
+{
+var map = new Map();
+map.set("kumar","20");
+map.set("Riyan","30");
+    
+}
+
+console.log(map);
+
+Function.prototype.myBind = function(...args){
+ var arr = args.slice(1);
+  var self = this;
+  return function(){
+  self.apply(args[0],arr);
+  }
+}
+
+var obj = {name:"Raju"};
+
+function Raju(param){
+console.log(this.name+"  "+param);
+}
+//Raju.myBind(obj,'123')();
+
+var arr = [5,3,8,6,2,90,12,43];
+
+
+
+Array.prototype.myMap = function(callBack){
+const newArr = [];
+for(var i=0;i<this.length;i++){
+	newArr.push(callBack(this[i],i));
+}
+return newArr;
+};
+
+var newArr = arr.myMap((item,ind,it,on)=>{
+ return item =item*2
+});
+
+
+
+
+Array.prototype.myFilter =function(callBack){
+const newArray = [];
+
+for(var i=0;i<this.length;i++){
+	if(callBack(this[i],this)){
+	newArray.push(this[i]);
+	}
+	
+}
+
+return newArray;
+
+}
+
+var filetredArray = arr.myFilter((item)=>{
+return item>10;
+});
+
+var APIArray = [{name:"kumar",age:32},
+{name:"Aryan",age:52},
+{name:"Riyan",age:42},
+{name:"Ricky",age:32}];
+
+
+
+
+Array.prototype.MyReduce = function(callBack,initialAcc){
+var acc = initialAcc?initialAcc:this[0];
+
+for(var i=0;i<this.length;i++){
+ acc = callBack(acc,this[i]);
+}
+return acc;
+};
+var TwoDArray = [[1,2,3],[4,5],[6,7,8]];
+var output = APIArray.reduce((acc,cur)=>{
+ 
+ acc[cur.age] = acc[cur.age] || []
+ 
+ acc[cur.age].push(cur);
+ return acc;
+},{});
+
+//console.log(output);
+
+function Parent(){
+
+var firstName;
+var lastName;
+
+this.setFirstName = function(first){
+firstName = first;
+}
+
+this.setLastName = function(last){
+lastName = last;
+}
+
+this.fullname = function(){
+ return "My name is "+firstName+" "+lastName;
+}
+
+}
+
+
+var object = {
+name:"Raju",
+getMyName:function(){return "Hello I am "+ this.name}
+}
+
+
+var newObject = {
+name:"Kumar"
+}
+
+function Razz(){
+
+}
+
+
+console.log(Razz.prototype);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<body>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="changeDecimalToBinary(8)">Generators1</button>
+<button onclick="changeBinaryToDecimal(111000)">Generators1</button>
+<div id="main"> abcd </div>
+
+</body>
+</html>
+</head>
+
+
+
+											

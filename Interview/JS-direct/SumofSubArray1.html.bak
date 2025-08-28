@@ -1,0 +1,113 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+// normal way to reverse an array
+
+function rotateNTimes(A,B){
+ var prefX =[];
+        prefX[0] = A[0];
+        for(var i=1;i<A.length;i++){
+        prefX[i] = prefX[i-1]+A[i];
+        }
+        var retArr = [];
+        for(var i=0;i<B.length;i++){
+            var count =0;
+            var left = B[i][0];
+            var right =B[i][1];
+            if(left == 0){
+                count += Number(prefX[right]);
+            }else{
+                count += Number(prefX[right])-Number(prefX[left-1]);
+            }
+            retArr.push(count);
+        }
+        console.log(retArr);
+}
+
+var arr =[3,2,4,6,1,9]
+
+var prefXArray = [3,5,9,15,16,25];
+
+function getOriginalArray(prefXArray){
+	var originaArray = [];
+	originaArray[0]=prefXArray[0];
+	
+	for(var i=1;i<prefXArray.length;i++){
+		originaArray[i] = prefXArray[i] - prefXArray[i-1];
+	}
+	//console.log(originaArray);
+}
+
+//getOriginalArray(prefXArray);
+
+function AntiDiagnals(){
+
+var arr = [[1,2,3,4],
+[5,6,7,8],
+[9,10,11,12],
+[13,14,15,16]];
+
+var i=0;
+var j=arr.length-1;
+
+while(i<arr.length){
+
+console.log(arr[i][j]);
+i++;
+j--;
+
+}
+
+
+}
+
+function SumOfAllEvenNumbers(arr){
+var count =0;
+for(var i=0;i<arr.length;i++){
+
+var removedArra = [...arr].splice(i,1);
+
+var evenSum =0;
+var oddSum =0;
+ for(var j=0;j<removedArra.length;j++){
+	if(j%2 == 0){
+		evenSum = evenSum +removedArra[j]
+	}else{
+		oddSum = oddSum+removedArra[j];
+	}
+ }
+ if(evenSum == oddSum){
+ count++
+ }
+
+}
+
+console.log(count);
+
+}
+
+
+
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="rotateNTimes([1, 2, 3, 4, 5],[[0, 3], [1, 2]])">Generators</button>
+<button onclick="AntiDiagnals()">Antidiagnols</button>
+<button onclick="SumOfAllEvenNumbers([4,3,2,7,6,-2])">SumOfAllEvenNumbers</button>
+
+</body>
+</html>
+</head>
+
+
+

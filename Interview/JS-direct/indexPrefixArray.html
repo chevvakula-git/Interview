@@ -1,0 +1,51 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+// normal way to reverse an array
+
+function rotateNTimes(A,B,C){
+var start = 0;
+var end = Number(A-1);
+var max = -Infinity;
+var prefXSum = [];
+prefXSum[0] = C[0];
+for(var i=1;i<C.length;i++){
+	prefXSum[i] = prefXSum[i-1]+C[i];
+}
+console.log(prefXSum);
+while(end<C.length){
+ var count = 0;
+if(start == 0){ count = prefXSum[end]
+}else{
+ count = prefXSum[end] - prefXSum[start-1]
+}
+
+if(count > max){ max = count};
+
+start++;
+end++;
+}
+console.log(max);
+}
+
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="rotateNTimes(4,12,[2,1,3,4,5])">Generators</button>
+
+</body>
+</html>
+</head>
+
+
+

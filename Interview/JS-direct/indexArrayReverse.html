@@ -1,0 +1,118 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+// normal way to reverse an array
+function GenerateReverseArray(){
+ var array =[1,2,3,4,5,6,7,8];
+ var newArray = [];
+ for(var i=array.length-1;i>=0;i--){
+	newArray.push(array[i]);
+ }
+console.log(newArray);
+}
+// optimized way to reverse an array
+function GenerateReverseArray1(){
+ var array =[1,2,3,4,9,5,6,7,8];
+ var i = 0;
+ var j = array.length-1;
+ 
+ while(i<j){
+ var temp = array[i];
+ array[i] =array[j]
+ array[j] = temp;
+  i++;
+  j--;
+ }
+console.log(array);
+}
+
+//rotate An array 
+
+function rotateArray(array,r){
+ var n = array.length%r;
+ for(var j=1;j<=r;j++){
+  var last = array[n-1];
+ for(var i=n-2;i>=0;i--){
+	array[i+1] = array[i];
+ }
+ array[0] = last;
+ }
+
+console.log(array);
+}
+
+function returnPair(A,B){
+
+  var i=0;
+  var revlaue = 0;
+        while(i<A.length){
+            for(var j=0;j<A.length;j++){
+             if(B == A[j]+A[i] && i!=j){
+                 revlaue =  1
+             }
+            }
+            i++;
+        }
+
+        console.log(revlaue);
+}
+
+function rotate(A,B,C){
+while(B<C){
+var temp = A[B];
+A[B] = A[C];
+A[C] = temp;
+B++;
+C--;
+}
+return A;
+}
+
+function rotateNTimes(A, B){
+ var n = A.length;
+        var k=  B%n; 2%5
+       
+         
+         rotate(A,0,k-1);
+         rotate(A,k,n-1);
+		 rotate(A,0,n-1);
+        console.log(A);
+	}
+	
+function minAndMax(A){
+  var max;
+        var min;
+        for(var i=0;i<A.length;i++){
+            if(i==0){min=A[i];max=A[i]}
+            if(A[i]>max){
+                max =A[i]
+            }
+            if(A[i]<min){
+                min =A[i];
+            }
+        }
+        console.log( max+min);
+
+}
+
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="rotateNTimes([1,2,3,4,5])">Generators</button>
+
+</body>
+</html>
+</head>
+
+
+

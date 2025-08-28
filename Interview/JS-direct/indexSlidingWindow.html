@@ -1,0 +1,43 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+// normal way to reverse an array
+
+function rotateNTimes(A,B,C){
+ 
+		var max = -Infinity;
+		for(var i=0;i<A;i++){
+			var count =0;
+			for(var j=i;j<A;j++){
+				count += C[j];
+				if(count<=B && count>= max){
+				max = count;
+			}
+			}
+			
+			
+		}
+		console.log((max == -Infinity)?0:max);
+}
+
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="rotateNTimes(9,14,[1,2,4,4,5,5,5,7,5])">Generators</button>
+
+</body>
+</html>
+</head>
+
+
+

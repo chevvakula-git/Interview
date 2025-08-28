@@ -1,0 +1,45 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+
+function CountFactors(n){
+   var arr = [];
+	for(var i=1; i<=n/i;i++){
+		
+		if(n%i == 0){
+			arr.push(i);
+
+			if(i !=n/i){
+			 arr.push(n/i);
+			}
+		}
+		
+	
+	}
+	
+	console.log(arr.sort((a,b)=>a-b))
+}
+CountFactors(36)
+
+
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="CountFactors()">Generators</button>
+
+</body>
+</html>
+</head>
+
+
+

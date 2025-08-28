@@ -1,0 +1,60 @@
+<html>
+<head>
+<style>
+.main{
+background-color:'red';
+height:'500px';
+}
+</style>
+<title> hello world </title>
+
+<script>
+// normal way to reverse an array
+
+function changeDecimalToBinary(A){
+ 
+ var i = A;
+ var arr ="";
+ while(i>0){
+  if(i%2 == 0){
+    arr = 0+arr;
+  }else{
+    arr = 1+arr;
+  }
+  i = Math.floor(i/2);
+ }
+ 
+ console.log(Number(arr));
+
+}
+
+function changeBinaryToDecimal(A){
+ 
+}
+
+var A =[[1,2,3],[3,4,5],[5,3,8]];
+
+ var arr =[];
+        for(var i=0;i<A.length;i++){
+            var count =0;
+            for(var j=0;j<A[i].length;j++){
+                count += A[i][j]
+            }
+            arr.push(count);
+        }
+
+console.log(arr);
+
+</script>
+<body>
+<h1> beautifull nature </h1>
+<input type="text" onkeyup="keyUpFunction(event)" style="width:300px"/>
+<button onclick="changeDecimalToBinary(8)">Generators1</button>
+<button onclick="changeBinaryToDecimal(111000)">Generators1</button>
+
+</body>
+</html>
+</head>
+
+
+
