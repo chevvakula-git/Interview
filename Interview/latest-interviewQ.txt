@@ -2,3 +2,4 @@
 2)how to write singleton class in javascript?
 3)how to implement a service in React?
 4)connect 4 params in react?
+5)Rect fiber - newly interduced hook
