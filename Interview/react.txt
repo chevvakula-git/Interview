@@ -539,6 +539,19 @@ plugins: is used to minify or uglifying our code.
 
 
 
+======================================React Fiber ===========================
+
+A complete re-writing of React rendering engine.
+Prioritized and interreptable rendering the updates like user input changes has high priorty rather than list item rendering. 
+1)It handles the how react update the DOM when state/rops changeHandler.
+2)It uses Linked list of fiber nodes insted of recurssion which allows Pause,Split and restarting 
+of rendering process.
+3) It supprorts asynchronus rendering and Suspense and Concurrent mode of rendering.
+4) Fiber Architecture interduced new concurrent hooks like useTransition,useDefferedValue,useId.
+5)Diference between UseEffect, UseLayouEffect
+
+
+
 
 
 
