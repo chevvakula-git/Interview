@@ -1,0 +1,26 @@
+Ai Python learnings..
+=======
+Connect with AI Chat GPT Answers --> from helper_functions from print_llm_response;
+
+print_llm_response("What is the capital if Japan?")
+
+result : Katmandu
+
+print(len("My name is Raju"));
+
+result : 15
+
+=========== Pydantic for LLM workflows =============
+
+This is mostly used for validations
+
+from Pydantic import BaseModel,EmailStr
+from typing import Literals,List
+
+class CustomerQuery(BaseModel):
+ name:str
+ email:EmailStr
+ query:str
+ category:Literals["","",""]
+ tags:List[str]
+===========================
